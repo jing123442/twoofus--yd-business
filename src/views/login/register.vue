@@ -67,7 +67,7 @@ export default {
   background:#fff;
 }
 .navbar{
-     position: absolute;
+    position: absolute;
     width: 100%;
     height: 100px;
     line-height: 100px;

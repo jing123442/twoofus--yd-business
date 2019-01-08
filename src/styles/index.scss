@@ -68,7 +68,25 @@ html {
   bottom: 0;
   background: url(../assets/slider-1.jpg) no-repeat center center;
   background-size: cover;
-
+  .register-head {
+    height: 360px;
+  }
+  .applyHead {
+    text-align: center;
+  }
+  .formCon {
+    background-color: #f4f6f8;
+    margin: auto;
+  }
+  .formcenter {
+    padding: 100px;
+    margin: auto;
+    width: 600px;
+  }
+  .el-input__inner {
+    height: 50px;
+    font-size:16px;
+  }
 }
 .padding-content {
   padding: 4px 0;

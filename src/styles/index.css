@@ -91,6 +91,30 @@ html {
   background-size: cover;
 }
 
+.register-page .register-head {
+  height: 360px;
+}
+
+.register-page .applyHead {
+  text-align: center;
+}
+
+.register-page .formCon {
+  background-color: #f4f6f8;
+  margin: auto;
+}
+
+.register-page .formcenter {
+  padding: 100px;
+  margin: auto;
+  width: 600px;
+}
+
+.register-page .el-input__inner {
+  height: 50px;
+  font-size: 16px;
+}
+
 .padding-content {
   padding: 4px 0;
 }

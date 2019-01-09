@@ -12,7 +12,10 @@ export const constantRouterMap = [
     path: '/register',
     component: () => import('@/views/login/register')
   },
-
+  {
+    path: '/test',
+    component: () => import('@/views/test.vue')
+  },
   {
     path: '/',
     component: () => LayOut,

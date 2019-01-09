@@ -1,10 +1,10 @@
 <template>
   <div class="login-page">
-  <div class="logo"><img src="../../assets/logo.png" /></div>
+  <div class="logo"><img :src="require(`@/assets/logo.png`)" /></div>
   <div class="container">
     <div class="login-container">
       <el-form ref="loginForm" class="login-form" :model="loginForm" label-width="100px"> <!--:rules="loginRules"-->
-        <h3 class="text-center">翼盾中心管理系统</h3>
+        <h3 class="text-center">翼盾商户管理系统</h3>
         <el-form-item prop="username" label="用户名">
           <el-input
             prefix-icon="el-icon-mobile-phone"

@@ -5,10 +5,7 @@
         <svg-icon icon-class="cate" />
       </li>
       <li class="nav">
-        <router-link tag="a" to="/site/nlist">网站管理</router-link>
-        <router-link tag="a" to="/company/list">企业中心</router-link>
-        <router-link tag="a" to="/finance/statistics">财务信息</router-link>
-        <!-- <router-link tag="a" to="/mess/index">信息回调</router-link> -->
+        <!-- <router-link tag="a" to="/site/nlist">网站管理</router-link> -->
       </li>
       <li></li>
       <li class="info">

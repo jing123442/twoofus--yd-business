@@ -14,55 +14,6 @@ const staticBar = [
         key: 'nlist',
         ico: 'notice',
         value: '公告管理'
-      },
-      {
-        key: 'banner',
-        ico: 'notice',
-        value: 'Banner管理'
-      }
-    ]
-  },
-  {
-    key: 'company',
-    ico: 'show',
-    value: '企业中心',
-    child: [
-      {
-        key: 'list',
-        ico: '',
-        value: '企业管理'
-      },
-      {
-        key: 'apply',
-        ico: '',
-        value: '申请管理'
-      }
-    ]
-  },
-  {
-    key: 'finance',
-    ico: 'caiwu',
-    value: '财务中心',
-    child: [
-      {
-        key: 'statistics',
-        ico: '',
-        value: '统计记录'
-      },
-      {
-        key: 'charge',
-        ico: '',
-        value: '充值管理'
-      },
-      {
-        key: 'amount',
-        ico: '',
-        value: '余额管理'
-      },
-      {
-        key: 'consume',
-        ico: '',
-        value: '消费管理'
       }
     ]
   }
@@ -73,7 +24,7 @@ const staticBar = [
   //   children: []
   // }
 ]
-const async = true
+const async = false
 const formatSide = () => {
   if (!getSide()) {
     return []

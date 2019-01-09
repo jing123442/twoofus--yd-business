@@ -24,7 +24,6 @@
             <a @click='gotoUrl' class='text-mini'>申请免费试用</a>
           </p>
         </el-form>
-     
       </div>
       <p class='info-center'>copyright © 2018 青岛翼租融资租赁有限责任公司. All rights reserved.</p>
     </div>
@@ -32,73 +31,73 @@
 </template>
 
 <script>
-  import loginApi from '@/api/login'
-  export default {
-    components: {},
-    data() {
-      return {
-        loginForm: {
-          username: '',
-          password: ''
-        },
-        checked: '',
-        imgsrc: '',
-        loginRules: {
-          username: [{
-              required: true,
-              message: '请输入用户名',
-              trigger: 'blur'
-            },
-            {
-              min: 3,
-              max: 30,
-              message: '长度在 3 到 30 个字符',
-              trigger: 'blur'
-            }
-          ],
-          password: [{
-            required: true,
-            min: 3,
-            max: 30,
-            message: '密码长度在 2 到 30 个字符',
-            trigger: 'blur'
-          }]
-        },
-        loading: false
-      }
-    },
-    created() {
-      this.handleCode()
-    },
-    methods: {
-      handleCode() {
-        this.imgsrc = loginApi['LOGINCODE']()
+import loginApi from '@/api/login'
+export default {
+  components: {},
+  data () {
+    return {
+      loginForm: {
+        username: '',
+        password: ''
       },
-      handleLogin() {
-        this.$refs.loginForm.validate(valid => {
-          if (valid) {
-            this.loading = true
-            this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
-              this.loading = false
-              this.$router.push({
-                path: '/'
-              })
-            }).catch(() => {
-              this.loading = false
+      checked: '',
+      imgsrc: '',
+      loginRules: {
+        username: [{
+          required: true,
+          message: '请输入用户名',
+          trigger: 'blur'
+        },
+        {
+          min: 3,
+          max: 30,
+          message: '长度在 3 到 30 个字符',
+          trigger: 'blur'
+        }
+        ],
+        password: [{
+          required: true,
+          min: 3,
+          max: 30,
+          message: '密码长度在 2 到 30 个字符',
+          trigger: 'blur'
+        }]
+      },
+      loading: false
+    }
+  },
+  created () {
+    this.handleCode()
+  },
+  methods: {
+    handleCode () {
+      this.imgsrc = loginApi['LOGINCODE']()
+    },
+    handleLogin () {
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+          this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
+            this.loading = false
+            this.$router.push({
+              path: '/'
             })
-          } else {
-            return false
-          }
-        })
-      },
-      gotoUrl() {
-        console.log('??????????????????');
-        this.$router.push({
-          path: '/register'
-        })
-      }
+          }).catch(() => {
+            this.loading = false
+          })
+        } else {
+          return false
+        }
+      })
+    },
+    gotoUrl () {
+      console.log('??????????????????')
+      this.$router.push({
+        path: '/register'
+      })
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -122,5 +121,4 @@
     font-size:13px;
     margin-top:20px;
   }
- 
 </style>

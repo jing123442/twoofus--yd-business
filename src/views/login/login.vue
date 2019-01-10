@@ -64,9 +64,10 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
+          this.$store.dispatch('LoginByUsername', this.loginForm).then((res) => {
+            console.log(res,'登录成功返回值')
             this.loading = false
-            this.$router.push({ path: '/' })
+            // this.$router.push({ path: '/' })
           }).catch(() => {
             this.loading = false
           })

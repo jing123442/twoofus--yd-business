@@ -1,5 +1,5 @@
 import loginApi from '@/api/login'
-import { setToken, setSide } from '@/utils/token'
+import { setToken, setSide, setAppId } from '@/utils/token'
 import { Message } from 'element-ui'
 // import sideBar from '@/meta/sidebar'
 const user = {
@@ -30,10 +30,13 @@ const user = {
           staffCode: username,
           staffPwd: userInfo.password
         }).then(response => {
+          console.log(response, 'fanhuizhiiiiiiii')
           const result = response.data
           if (result.code === 200) {
+            console.log(result.datas, '所有返回数据')
             // commit('SET_TOKEN', result.datas.tokenKey)
             commit('SET_INFO', result.datas.userInfo)
+            setAppId(result.datas.userInfo.appId)
             setToken(result.datas.tokenKey)
             setSide(result.datas.menuList)
             resolve()

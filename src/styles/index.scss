@@ -100,6 +100,9 @@ div:focus{
 .text-center {
   text-align: center;
 }
+.text-left {
+  text-align: left;
+}
 
 .block {
   display: block;
@@ -122,6 +125,12 @@ div:focus{
     clear: both;
     height: 0;
   }
+}
+.model-con{
+  background:#fff;
+  padding:20px;
+  width:100%;
+  height:100%;
 }
 .logotxt {
   color: rgba(255,255,255,1);
@@ -231,8 +240,9 @@ div:focus{
 }
 #main {
   margin: 20px;
-  background: #fff;
+  background: #ebf2fb;
   padding: 20px;
+  position:relative;
 }
 #pagescoll {
   height: calc(100vh - 60px);
@@ -291,8 +301,7 @@ div:focus{
   border-left: 5px solid #50bfff;
   margin: 10px 0;
 }
-.filterBtn {
-}
+
 .bgitem {
   margin-bottom: 10px;
   border-bottom: 1px solid #f2f2f2;
@@ -300,4 +309,23 @@ div:focus{
   &:nth-child(odd) {
     background-color: #ebeef5
   }
+}
+.mainFooter {
+  // position:absolute;
+  text-align:center;
+  width:100%;
+  margin:auto;
+  font-size: 13px;
+  color: #c2c2c2;
+  left:0;
+  right:0;
+  bottom: 0;
+  width: 100%;
+  line-height: 70px;
+  a {
+    font-size: 13px;
+  }
+}
+.elPagination{
+  padding-top:20px;
 }

@@ -4,7 +4,7 @@
       <el-button type="primary" icon="el-icon-circle-plus" size="mini" round @click="addBanner">添加Banner</el-button>
     </div>
     <el-row :gutter="10">
-      <el-col :span="12" v-for="(item, index) in imgList" :key="index" v-if='index<10'>
+      <!-- <el-col :span="12" v-for="(item, index) in imgList" :key="index" v-if='index<10'>
         <el-card :body-style="{ padding: '10px' }">
           <a :href="item.bannerLink" target="_blank"><img :src="item.bannerSrc" class="image"></a>
           <div class="imgtxt">
@@ -18,7 +18,7 @@
             </div>
           </div>
         </el-card>
-      </el-col>
+      </el-col> -->
     </el-row>
     <el-dialog
       title="添加Banner"

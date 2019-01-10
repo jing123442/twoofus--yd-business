@@ -37,6 +37,46 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/datacenter',
+    component: () => LayOut,
+    redirect: '/datacenter/overview',
+    meta: {title: '数据中心'},
+    children: [
+      {
+        path: 'overview',
+        component: () => import('@/views/dataCenter/overView'),
+        name: '',
+        meta: {title: '总览'}
+      },
+      {
+        path: 'usedetails',
+        component: () => import('@/views/dataCenter/useDetails'),
+        name: '',
+        meta: {title: '总览'}
+      }
+    ]
+  },
+  {
+    path: '/financecenter',
+    component: () => LayOut,
+    redirect: '/financecenter/cashrecharge',
+    meta: {title: '财务中心'},
+    children: [
+      {
+        path: 'cashrecharge',
+        component: () => import('@/views/finanCecenter/cashRecharge'),
+        name: '',
+        meta: {title: '现金充值'}
+      },
+      // {
+      //   path: 'useDetails',
+      //   component: () => import('@/views/dataCenter/useDetails'),
+      //   name: '',
+      //   meta: {title: '总览'}
+      // }
+    ]
+  },
+  {
     path: '*',
     component: () => LayOut,
     redirect: '/404',

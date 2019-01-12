@@ -20,8 +20,8 @@
 
 <script>
 export default {
-  props: ["values"]
-};
+  props: ['values']
+}
 </script>
 
 <style scoped lang='scss'>

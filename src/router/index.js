@@ -68,12 +68,44 @@ export const constantRouterMap = [
         name: '',
         meta: {title: '现金充值'}
       },
-      // {
-      //   path: 'useDetails',
-      //   component: () => import('@/views/dataCenter/useDetails'),
-      //   name: '',
-      //   meta: {title: '总览'}
-      // }
+      {
+        path: 'rechargeList',
+        component: () => import('@/views/finanCecenter/rechargeList'),
+        name: '',
+        meta: {title: '充值记录'}
+      },
+      {
+        path: 'consumerecord',
+        component: () => import('@/views/finanCecenter/consumeRecord'),
+        name: '',
+        meta: {title: '消费记录'}
+      },
+    ]
+  },
+  {
+    path: '/infomanage',
+    component: () => LayOut,
+    redirect: '/infomanege/userinfo',
+    meta: {title: '信息管理'},
+    children: [
+      {
+        path: 'userinfo',
+        component: () => import('@/views/infoManage/userInfo'),
+        name: '',
+        meta: {title: '商户信息'}
+      },
+      {
+        path: 'resetpass',
+        component: () => import('@/views/infoManage/resetPass'),
+        name: '',
+        meta: {title: '修改密码'}
+      },
+      {
+        path: 'setting',
+        component: () => import('@/views/infoManage/setting'),
+        name: '',
+        meta: {title: '通用设置'}
+      }
     ]
   },
   {

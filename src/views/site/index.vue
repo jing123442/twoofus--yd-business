@@ -120,7 +120,7 @@ export default {
         }).catch(error => {
           console.log(error)
         })
-        }).catch(() => {
+      }).catch(() => {
       })
     },
     onSaveNotice () {

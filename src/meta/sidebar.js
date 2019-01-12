@@ -24,7 +24,7 @@ const staticBar = [
   //   children: []
   // }
 ]
-const async = false
+const async = true
 const formatSide = () => {
   if (!getSide()) {
     return []
@@ -53,9 +53,9 @@ const formatSide = () => {
   // console.log(sideArr)
   return sideArr
 }
-// formatSide()
+formatSide()
 const sideBar = {
-  mainbar() {
+  mainbar () {
     return async ? formatSide() : staticBar
   }
 }

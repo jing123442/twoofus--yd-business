@@ -15,17 +15,17 @@
 </template>
 
 <script>
-/*组件方式引用*/
-import "swiper/dist/css/swiper.css"; ////这里注意具体看使用的版本是否需要引入样式，以及具体位置。
-import { swiper, swiperSlide } from "vue-awesome-swiper";
+/* 组件方式引用 */
+import 'swiper/dist/css/swiper.css' // 这里注意具体看使用的版本是否需要引入样式，以及具体位置
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
-  name: "carrousel",
+  name: 'carrousel',
   components: {
     swiper,
     swiperSlide
   },
-  props: ["infolist"],
-  data() {
+  props: ['infolist'],
+  data () {
     return {
       option: {
         // NotNextTick is a component's own property, and if notNextTick is set to true, the component will not instantiate the swiper through NextTick, which means you can get the swiper object the first time (if you need to use the get swiper object to do what Things, then this property must be true)
@@ -38,7 +38,7 @@ export default {
           // stopOnLastSlide: true
         },
         // autoplay: false,
-        direction: "vertical",
+        direction: 'vertical',
         // effect: "coverflow",
         speed: 1000,
         loop: true,
@@ -53,7 +53,7 @@ export default {
         paginationClickable: true,
         // scrollbar:'.swiper-scrollbar',
         mousewheelControl: true,
-        observer: true, //修改swiper自己或子元素时，自动初始化swiper
+        observer: true, // 修改swiper自己或子元素时，自动初始化swiper
         observeParents: true
         // if you need use plugins in the swiper, you can config in here like this
         // 如果自行设计了插件，那么插件的一些配置相关参数，也应该出现在这个对象中，如下debugger
@@ -67,23 +67,22 @@ export default {
         // ...
       },
       list: []
-    };
+    }
   },
   watch: {
-    infolist() {
-      //用于刷新swiper
-      this.list = [];
+    infolist () { // 用于刷新swiper
+      this.list = []
       this.$nextTick(() => {
-        this.list = this.infolist;
-      });
+        this.list = this.infolist
+      })
     }
   },
-  mounted() {
+  mounted () {
     if (this.infolist && this.infolist.length) {
-      this.list = this.infolist;
+      this.list = this.infolist
     }
   }
-};
+}
 </script>
 
 <style scoped lang='scss'>

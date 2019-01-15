@@ -1,17 +1,47 @@
 <template>
   <ul class="dataBlock">
-    <li v-for="(item,index) in values" :key="index">
-      <div class="dataBody">
+    <li>
+      <div class="dataBody redStyle">
         <div>
-          <p class="img">img</p>
+          <p class="img"><i class='el-icon-message'></i></p>
           <p class="item">
-            <span class="title">{{item.item}}</span>
-            <span class="number">{{item.val}}</span>
+            <span class="title">{{values[0].item}}</span>
+            <span class="number">{{values[0].val}}</span>
           </p>
         </div>
-        <p class="tip">
+        <p class="mytip">
           <i class="el-icon-warning"></i>
-          {{item.tip}}
+          {{values[0].tip}}
+        </p>
+      </div>
+    </li>
+    <li >
+      <div class="dataBody orangeStyle">
+        <div>
+          <p class="img"><i class='el-icon-document'></i></p>
+          <p class="item">
+            <span class="title">{{values[1].item}}</span>
+            <span class="number">{{values[1].val}}</span>
+          </p>
+        </div>
+        <p class="mytip">
+          <i class="el-icon-warning"></i>
+          {{values[1].tip}}
+        </p>
+      </div>
+    </li>
+    <li>
+      <div class="dataBody greenStyle">
+        <div>
+          <p class="img"><i class='el-icon-printer'></i></p>
+          <p class="item">
+            <span class="title">{{values[2].item}}</span>
+            <span class="number">{{values[2].val}}</span>
+          </p>
+        </div>
+        <p class="mytip">
+          <i class="el-icon-warning"></i>
+          {{values[2].tip}}
         </p>
       </div>
     </li>
@@ -44,7 +74,7 @@ export default {
     padding: 0 0 0 16px;
   }
   .dataBody {
-    background: #fff;
+    border-radius:10px;
     height: 100%;
     padding: 30px 29px;
     div {
@@ -62,6 +92,10 @@ export default {
       .img {
         width: 40px;
         height: 60px;
+        i{
+          line-height:60px;
+          font-size:55px;
+        }
       }
       .item {
         span {
@@ -70,7 +104,8 @@ export default {
           text-align: right;
         }
         .title {
-          font-size: 16px;
+          font-size: 18px;
+          font-weight:500;
         }
         .number {
           font-size: 25px;
@@ -80,7 +115,7 @@ export default {
         }
       }
     }
-    .tip {
+    .mytip {
       font-size: 13px;
       line-height: 16px;
       text-align: left;

@@ -1,7 +1,7 @@
 <template>
   <div class="useDetailsPage">
     <div class="model-con">产品名称：
-      <el-select v-model="productChoosed" placeholder="请选择">
+      <el-select v-model="productChoosed" placeholder="全部产品" @change='searchTrend'>
         <el-option
           v-for="item in productList"
           :key="item.value"
@@ -12,30 +12,37 @@
     </div>
     <DataBlock :values="dataBlock"></DataBlock>
     <div style="padding:30px;" class="model-con">
-      <el-form :model="formInline">
-        <el-form-item label="选择时间">
-          <el-date-picker
-            format="yyyy 年 MM 月 dd 日"
-            value-format="yyyy-MM-dd"
-            v-model="formInline.date"
-            type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
+      <el-form :model="formInline" >
+        <el-form-item label="选择日期：">
+          <el-col :span="11">
+            <el-date-picker
+            type="date"
+            placeholder="开始日期"
+            v-model="formInline.startDate"
+            style="width: 100%;"
           ></el-date-picker>
-          <el-button type="primary" plain @click="indexClick(1)" class="buttonstyle">调用总次数</el-button>
+        </el-col>
+        <el-col class="line" :span="2">-</el-col>
+        <el-col :span="11">
+          <el-date-picker
+            type="date"
+            placeholder="结束日期"
+            v-model="formInline.endDate"
+            style="width: 100%;"
+          ></el-date-picker>
+        </el-col>
+        <el-button type="primary" plain @click="indexClick(1)" class="buttonstyle">调用总次数</el-button>
           <el-button type="primary" plain @click="indexClick(2)">调用总金额</el-button>
-          <el-button type="primary" plain @click="indexClick(3)">充值总金额</el-button>
           <el-button type="primary" @click="searchTrend" style="float:right">搜索</el-button>
-        </el-form-item>
+      </el-form-item>
       </el-form>
-
       <chart :options="option" auto-resize/>
     </div>
   </div>
 </template>
 
 <script>
+import { paramFilter } from '@/filters/index'
 import overViewApi from '@/api/dataCenter'
 import moment from 'moment'
 export default {
@@ -88,7 +95,9 @@ export default {
         ]
       },
       formInline: {
-        date: [moment().subtract('days', 6).format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')]
+        // date: [moment().subtract('days', 6).format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')]
+        startDate: '',
+        endDate: ''
       },
       trend: '1',
       productChoosed: '',
@@ -104,9 +113,10 @@ export default {
     getProdect () {
       overViewApi['PRODUCTLIST']({}).then(res => {
         this.productList = res.data.datas
+        this.productList.unshift({channelId: null, channelName: '全部产品'})
       }).catch(error => {
-          console.log(error)
-        })
+        console.log(error)
+      })
     },
     getDataRecord () {
       overViewApi['DATARECORD']({}).then(res => {
@@ -115,8 +125,8 @@ export default {
         this.dataBlock[1].val = '￥' + result.recordAmount
         this.dataBlock[2].val = '￥' + result.totalBalance
       }).catch(error => {
-          console.log(error)
-        })
+        console.log(error)
+      })
     },
     indexClick (val) {
       this.trend = val
@@ -125,20 +135,21 @@ export default {
       this.getList()
     },
     getList () {
-      overViewApi['TRENDCHART']({
+      let tempStartDate = moment(new Date(this.formInline.startDate) * 1).format('YYYY-MM-DD')
+      let tempEndDate = moment(new Date(this.formInline.endDate) * 1).format('YYYY-MM-DD')
+      const param = {
+        channelId: this.productChoosed,
         index: this.trend,
-        startDate: this.formInline.date[0],
-        endDate: this.formInline.date[1]
-      })
+        startDate: tempStartDate,
+        endDate: tempEndDate
+      }
+      console.log(paramFilter(param))
+      overViewApi['TRENDCHART'](paramFilter(param))
         .then(response => {
           const result = response.data
           if (result.code === 200) {
             this.option.xAxis.data = result.datas.labels
-            this.option.series = [
-              {
-                data: result.datas.data
-              }
-            ]
+            this.option.series = [{data: result.datas.data}]
           }
         })
         .catch(error => {

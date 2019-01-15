@@ -11,7 +11,7 @@ export const constantRouterMap = [
   {
     path: '/',
     component: () => LayOut,
-    redirect: 'home',
+    // redirect: 'home',
     meta: {title: '主页'},
     children: [
       {
@@ -25,7 +25,7 @@ export const constantRouterMap = [
   {
     path: '/site',
     component: () => LayOut,
-    redirect: '/site/nlist',
+    // redirect: '/site/nlist',
     meta: {title: '网站管理'},
     children: [
       {
@@ -39,70 +39,70 @@ export const constantRouterMap = [
   {
     path: '/datacenter',
     component: () => LayOut,
-    redirect: '/datacenter/overview',
+    // redirect: '/datacenter/index',
     meta: {title: '数据中心'},
     children: [
       {
-        path: 'overview',
+        path: 'index',
         component: () => import('@/views/dataCenter/overView'),
         name: '',
         meta: {title: '总览'}
       },
       {
-        path: 'usedetails',
-        component: () => import('@/views/dataCenter/useDetails'),
+        path: 'user_view',
+        component: () => import('@/views/dataCenter/userView'),
         name: '',
-        meta: {title: '总览'}
+        meta: {title: '使用详情'}
       }
     ]
   },
   {
     path: '/financecenter',
     component: () => LayOut,
-    redirect: '/financecenter/cashrecharge',
+    // redirect: '/financecenter/recharge',
     meta: {title: '财务中心'},
     children: [
       {
-        path: 'cashrecharge',
+        path: 'recharge',
         component: () => import('@/views/finanCecenter/cashRecharge'),
         name: '',
         meta: {title: '现金充值'}
       },
       {
-        path: 'rechargeList',
+        path: 'record',
         component: () => import('@/views/finanCecenter/rechargeList'),
         name: '',
         meta: {title: '充值记录'}
       },
       {
-        path: 'consumerecord',
+        path: 'consumption',
         component: () => import('@/views/finanCecenter/consumeRecord'),
         name: '',
         meta: {title: '消费记录'}
-      },
+      }
     ]
   },
   {
     path: '/infomanage',
     component: () => LayOut,
-    redirect: '/infomanege/userinfo',
+    // redirect: '/infomanage/merchant',
     meta: {title: '信息管理'},
     children: [
       {
-        path: 'userinfo',
-        component: () => import('@/views/infoManage/userInfo'),
+        path: 'merchant',
+        component: () => import('@/views/infoManage/merchant'),
         name: '',
         meta: {title: '商户信息'}
       },
       {
-        path: 'resetpass',
-        component: () => import('@/views/infoManage/resetPass'),
+        path: 'password',
+        component: () => import('@/views/infoManage/password'),
         name: '',
         meta: {title: '修改密码'}
       },
       {
-        path: 'setting',
-        component: () => import('@/views/infoManage/setting'),
+        path: 'setup',
+        component: () => import('@/views/infoManage/setup'),
         name: '',
         meta: {title: '通用设置'}
       }
@@ -111,7 +111,7 @@ export const constantRouterMap = [
   {
     path: '*',
     component: () => LayOut,
-    redirect: '/404',
+    // redirect: '/404',
     children: [
       {
         path: '404',

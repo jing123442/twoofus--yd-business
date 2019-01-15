@@ -8,6 +8,7 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   background: #ebf2fb;
+  color:#606266;
 }
 textarea {
   font-family: "Arial";
@@ -24,7 +25,22 @@ html {
 #app{
   height: 100%;
 }
-
+.greenStyle{
+  color: #67c23a;
+  background: #f0f9eb;
+  // border: 1px solid #c2e7b0;
+}
+.orangeStyle{
+  color: #e6a23c;
+  background: #fdf6ec;
+  // border: 1px solid #f5dab1;
+}
+.redStyle{
+  color: #f56c6c;
+  background: #fef0f0;
+  // border:1px solid #fbc4c4;
+  
+}
 *,
 *:before,
 *:after {
@@ -117,6 +133,8 @@ div:focus{
   height:100%;
   overflow: hidden;
   margin-bottom:30px;
+  border-radius:10px;
+  box-shadow: 1px 0 20px rgba(0,0,0,.08);
   & > li {
     list-style: none;
     margin: 0;
@@ -128,6 +146,7 @@ div:focus{
       height: 100%;
       margin: 10px 0 35px 0;
       line-height:16px;
+      color: #303133;
       
     }
 }
@@ -191,7 +210,7 @@ div:focus{
 .content {
   flex-direction: column;
   padding: 60px 0px 0px $left;
-  color: #232323;
+  color: #606266;
 }
 .el-menu {
   border: 0;
@@ -271,6 +290,9 @@ div:focus{
 }
 .text-right {
   text-align: right;
+  i{
+    margin-right:5px;
+  }
 }
 .divider {
   height: 1px;
@@ -349,4 +371,11 @@ div:focus{
 }
 .elPagination{
   padding-top:20px;
+}
+.navButton{
+  background:#0f75ff; 
+  border:#0f75ff;
+  width:80%;
+  color:#fff;
+  margin-top:50px;
 }

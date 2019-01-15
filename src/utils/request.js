@@ -33,26 +33,26 @@ service.interceptors.request.use(config => {
 })
 
 // respone interceptor
-service.interceptors.response.use(
-  // response => response,
-  response => {
-    const res = response.data
-    if (res.code !== '0') {
-      if (res.code === 1200) {
-        // token 失效处理
-        Message.warning({
-          message: res.message
-        })
-        removeToken()
-        window.location.reload()
-        // this.$router.push({ path: '/login' })
-      }
-    }
-    return response
-  },
-  error => {
-    console.log('err' + error) // for debug
-    return Promise.reject(error)
-  })
+// service.interceptors.response.use(
+//   // response => response,
+//   response => {
+//     const res = response.data
+//     if (res.code !== '0') {
+//       if (res.code === 1200) {
+//         // token 失效处理
+//         Message.warning({
+//           message: res.message
+//         })
+//         removeToken()
+//         window.location.reload()
+//         this.$router.push({ path: '/login' })
+//       }
+//     }
+//     return response
+//   },
+//   error => {
+//     console.log('err' + error) // for debug
+//     return Promise.reject(error)
+//   })
 
 export default service

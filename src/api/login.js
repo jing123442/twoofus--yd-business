@@ -1,6 +1,21 @@
 import request from '@/utils/request'
 import commonQuery from '@/utils/commonQuery'
 
+import {
+  getToken,
+  getAppId
+} from '@/utils/token'
+
+const TOKEN = getToken()
+const APPID = getAppId()
+const pageQuery = () => {
+  return Object.assign({}, {
+    tokenKey: TOKEN
+  }, {
+    appId: APPID
+  }, commonQuery())
+}
+
 const loginApi = {
   LOGININFO  ({
     staffCode = 'wangshan',
@@ -13,6 +28,13 @@ const loginApi = {
         staffCode,
         staffPwd
       }, commonQuery())
+    })
+  },
+  PRODUCTMENU () {
+    return request({
+      url: 'busi/product/tree.cmd',
+      method: 'post',
+      data: pageQuery()
     })
   }
 }

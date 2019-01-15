@@ -24,18 +24,17 @@
 <script>
 export default {
   props: ['headTitle', 'randerData'],
-  data() {
-    return { 
-     switchVal: true ,
+  data () {
+    return {
+      switchVal: true
     }
   },
-  methods:{
-    switchWatcher(){
-      this.$emit('switchstatus',this.switchVal)
+  methods: {
+    switchWatcher () {
+      this.$emit('switchstatus', this.switchVal)
     }
   },
-  mounted(){
- 
+  mounted () {
   }
 }
 </script>

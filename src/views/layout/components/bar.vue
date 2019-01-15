@@ -47,7 +47,7 @@
 import { pathFilter } from '@/filters/index'
 // import path from 'path'
 // import { mapMutations, mapGetters } from 'vuex'
-import sideBar from '@/meta/sidebar'
+import { formatSide } from '@/meta/sidebar'
 import TreeMenu from '@/components/tree/treemenu'
 import { getMenuType, getUserName, getPassWord} from '@/utils/token'
 export default {
@@ -59,18 +59,16 @@ export default {
     return {
       isCollapse: false,
       openMenu: [],
-      menuType: 1,
+      menuType: '1',
       loginForm: {
         username: '',
         password: ''
-      }
+      },
+      getMenuArr: [],
+      sidebarList: []
     }
   },
   computed: {
-    sidebarList () {
-      console.log(sideBar.mainbar())
-      return sideBar.mainbar()
-    }
     // ...mapGetters([
     //   'sidebarList'
     // ])
@@ -83,36 +81,33 @@ export default {
       let pathTo = pathFilter(keyPath[1], keyPath[0])
       this.$router.push({ path: pathTo })
     },
-    changeMenu () { // product,user 点击后请求另一套接口，渲染目录 ,vuex中存入的状态是user，触发
-      this.menuType = getMenuType()
+    changeMenu () {
+      console.log(getMenuType())
       if (this.menuType === '1') {
-        console.log('11111111')
+        this.menuType = '2'
         this.$store.dispatch('productMenuGet').then(res => {
+          this.getMenuArr = JSON.parse(sessionStorage.getItem("setSide"))
+          this.sidebarList = formatSide(this.getMenuArr, this.menuType)
         })
       } else if (this.menuType === '2') {
-        this.loginForm.username = getUserName()
-        this.loginForm.password = getPassWord()
-        this.$store.dispatch('LoginByUsername', this.loginForm).then((res) => {
-          this.$router.push({ path: '/' })
+        this.menuType = '1'
+        this.$store.dispatch('LoginByUsername', this.loginForm).then(res => {
+          this.getMenuArr = JSON.parse(sessionStorage.getItem("setSide"))
+          this.sidebarList = formatSide(this.getMenuArr, this.menuType)
+          console.log('1111111111111',this.getMenuArr)
         }).catch(() => {
         })
       }
     }
   },
   created () {
-    // this.setSidebarList('mainbar')
-    this.sidebarList.forEach(item => {
-      this.openMenu.push({key: item.key, parentId: item.id})
-    })
+    this.getMenuArr = JSON.parse(sessionStorage.getItem("setSide"))
+    this.sidebarList = formatSide(this.getMenuArr, this.menuType)
+    this.loginForm.username = getUserName()
+    this.loginForm.password = getPassWord() 
   },
   watch: {
-    sidebarList () {
-      if (this.sidebarList) {
-        this.sidebarList.forEach(item => {
-          this.openMenu.push({key: item.key, parentId: item.id})
-        })
-      }
-    }
+
   }
 }
 </script>

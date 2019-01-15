@@ -37,3 +37,32 @@
 .el-pagination {
   text-align: right;
 }
+.el-col-2{
+  text-align: center;
+}
+.inline-form{
+  .el-form-item__label{
+    text-align: left;
+    width:82px!important;
+  }
+  .el-form-item__content {
+    margin-left:82px!important;
+    margin-right:20px;
+  }
+  .el-col-11 {
+    width:45%;
+  }
+  .el-col-2 {
+    width:6%;
+  }
+}
+
+.el-col-11 {
+  width:15%;
+}
+.el-col-2 {
+  width:2%;
+}
+.el-table__header-wrapper .el-table th {
+  background:#333!important;
+}

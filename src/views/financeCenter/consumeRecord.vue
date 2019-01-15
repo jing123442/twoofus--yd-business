@@ -1,7 +1,7 @@
 <template>
   <div class="model-con">
-    <el-form ref="consumeList" :model="consumeList" label-width="120px" class="flex">
-      <el-form-item label="产品名称">
+    <el-form ref="consumeList" :model="consumeList" label-width="120px" class="flex inline-form">
+      <el-form-item label="产品名称：">
         <el-select v-model="consumeList.channelId" placeholder="请选择充值类型">
           <el-option  v-for="item in productList" :key="item.value" :label="item.channelName" :value="item.channelId" ></el-option>
         </el-select>
@@ -25,13 +25,13 @@
           ></el-date-picker>
         </el-col>
       </el-form-item>
-      <el-form-item label="姓名">
+      <el-form-item label="姓名：">
         <el-input v-model="consumeList.custName"></el-input>
       </el-form-item>
     </el-form>
     <div class="text-right">
-      <el-button type="primary" round size="small" @click="getConsumeList">搜索</el-button>
-      <el-button type="success" round size="small" @click='exportConsumeList'>导出</el-button>
+      <el-button type="primary" round size="small" @click="getConsumeList"><i class='el-icon-search' ></i>搜索</el-button>
+      <el-button type="success" round size="small" @click='exportConsumeList'><i class='el-icon-download'></i>导出</el-button>
     </div>
     <elTable :headTitle="tableTitle" :randerData="tableRanderData"></elTable>
     <el-pagination
@@ -46,85 +46,92 @@
 </template>
 
 <script>
+import moment from 'moment'
 import overViewApi from '@/api/dataCenter'
-import exportExcel from '@/utils/common'
-import financeApi from "@/api/financeCenter"
-import elTable from "@/components/table/elTable"
+import {exportExcel} from '@/utils/common'
+import financeApi from '@/api/financeCenter'
+import elTable from '@/components/table/elTable'
 export default {
-  data() {
+  data () {
     return {
       consumeList: {
         custName: '',
-        channelId: '', 
-        startDate: moment() .subtract("days", 6).format("YYYY-MM-DD"),
-        endDate: moment().format("YYYY-MM-DD"),
+        channelId: '',
+        startDate: moment().subtract('days', 6).format('YYYY-MM-DD'),
+        endDate: moment().format('YYYY-MM-DD')
       },
       tableTitle: [
-        { prop: "channelName", label: "产品名称" },
-        { prop: "serviceTypeName", label: "产品类型" },
-        { prop: "custname", label: "姓名" },
-        { prop: "custphone", label: "手机号" },
-        { prop: "custIdcard", label: "身份证" },
-        { prop: "feeTypeName", label: "计费模式" },
-        { prop: "saleAmt", label: "本次扣费" },
-        { prop: "requestTime", label: "时间" }
+        { prop: 'channelName', label: '产品名称' },
+        { prop: 'serviceTypeName', label: '产品类型' },
+        { prop: 'custname', label: '姓名' },
+        { prop: 'custphone', label: '手机号' },
+        { prop: 'custIdcard', label: '身份证' },
+        { prop: 'feeTypeName', label: '计费模式' },
+        { prop: 'saleAmt', label: '本次扣费' },
+        { prop: 'requestTime', label: '时间' }
       ],
       tableRanderData: [],
       currentPage: 1,
       totalPage: 5,
-      productList:[],
-    };
+      productList: []
+    }
   },
   methods: {
     getProduct () {
       overViewApi['PRODUCTLIST']({}).then(res => {
         this.productList = res.data.datas
       }).catch(error => {
-          console.log(error)
-        })
+        console.log(error)
+      })
     },
-    getParam(){
+    getParam () {
       let tempStartDate = moment(new Date(this.consumeList.startDate) * 1).format('YYYY-MM-DD ')
       let tempEndDate = moment(new Date(this.consumeList.endDate) * 1).format('YYYY-MM-DD')
-       return {
+      return {
         pageNum: this.currentPage,
         pageSize: 10,
         custName: this.consumeList.custName,
         channelId: this.consumeList.channelId,
         startDate: tempStartDate,
-        endDate: tempEndDate 
-       } 
+        endDate: tempEndDate
+      }
     },
-    getConsumeList() {
-      financeApi["CONSUMELIST"](this.getParam()).then(res => {
-          console.log(res)
+    getConsumeList () {
+      financeApi['CONSUMELIST'](this.getParam()).then(res => {
         this.totalPage = res.data.datas.lastPage * 10
         this.tableRanderData = res.data.datas.list
         this.tableRanderData.map(item => {
-            item.requestTime= moment(new Date(item.requestTime) * 1).format('YYYY-MM-DD hh:mm:ss')
-        if(item.feeTypeId === '13' || item.feeTypeId === '14' || item.feeTypeId === '15'){
-          item.saleAmt = '-'
-        } else {
-            
-        }
+          item.requestTime = moment(new Date(item.requestTime) * 1).format('YYYY-MM-DD hh:mm:ss')
+          if (item.feeTypeId === '13' || item.feeTypeId === '14' || item.feeTypeId === '15') {
+            item.saleAmt = '-'
+          }
         }
         )
       }).catch(error => {
-          console.log(error)
-        })
+        console.log(error)
+      })
     },
-    exportConsumeList(){
-     financeApi['EXPORTRECHARGELIST'](this.getParam()).then(res =>{
-       let result = res.data
-      //  exportExcel(result)
-     })
+    exportConsumeList () {
+      if (this.tableRanderData.length === 0) {
+        this.$message({
+          message: '没有要导出的数据',
+          type: 'warning'
+        })
+        return false
+      }
+      financeApi['EXPORTRECHARGELIST'](this.getParam()).then(res => {
+        let result = res.data
+        exportExcel(result)
+      }).catch(error => {
+        console.log(error)
+      })
     },
     handleCurrentChange (val) {
       this.getConsumeList('10', val)
-    },
+    }
   },
-  created(){
-      this.getProduct()
+  created () {
+    this.getProduct()
   },
   components: {
     elTable

@@ -103,14 +103,14 @@ const financeApi = {
   },
   /**
    *  消费记录
-   */ 
+   */
   CONSUMELIST ({
     pageNum = '',
     pageSize = '',
     custName = '',
     startDate = '',
     endDate = '',
-    channelId = '',
+    channelId = ''
   }) {
     return request({
       url: 'busi/consume/list.cmd',
@@ -131,7 +131,7 @@ const financeApi = {
     custName = '',
     startDate = '',
     endDate = '',
-    channelId = '',
+    channelId = ''
   }) {
     return request({
       url: 'busi/consume/export.cmd',
@@ -145,6 +145,6 @@ const financeApi = {
         channelId
       }, pageQuery())
     })
-  },
+  }
 }
 export default financeApi

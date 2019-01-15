@@ -58,18 +58,19 @@ const overViewApi = {
     })
   },
   TRENDCHART ({
+    channelId = '',
     index = '1',
     startDate = '',
-    endDate = '',
-    tokenKey = TOKEN
+    endDate = ''
   }) {
     return request({
-      url: 'busi/statistic/manage/trend.cmd',
+      url: 'busi/statistic/user/trend.cmd',
       method: 'post',
       data: Object.assign({
         index,
         startDate,
-        endDate
+        endDate,
+        channelId
       }, pageQuery())
     })
   }

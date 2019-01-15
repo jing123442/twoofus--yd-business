@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div>
     <div class='model-con'>
         <h3>基本信息</h3>
         <el-form >
@@ -41,28 +41,27 @@
 </template>
 
 <script>
+import moment from 'moment'
 import infoManageApi from '@/api/infoManage'
 export default {
-  data() {
-      return {
-          userInfomation: {},
-      }
+  data () {
+    return {
+      userInfomation: {}
+    }
   },
-  methods:{
-      getUserInfo(){
-     infoManageApi['USERINFO']({}).then(res =>{
-    this.userInfomation = res.data.datas
-    this.userInfomation.createTime = moment(new Date(this.userInfomation.createTime) * 1).format('YYYY-MM-DD ')
-    console.log(res);
-   })
-      }
+  methods: {
+    getUserInfo () {
+      infoManageApi['USERINFO']({}).then(res => {
+        this.userInfomation = res.data.datas
+        this.userInfomation.createTime = moment(new Date(this.userInfomation.createTime) * 1).format('YYYY-MM-DD ')
+      })
+    }
   },
-  created(){
-      this.getUserInfo()
-  },
+  created () {
+    this.getUserInfo()
+  }
 }
 </script>
 
 <style scoped>
-
 </style>

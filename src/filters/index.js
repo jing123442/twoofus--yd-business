@@ -82,6 +82,26 @@ export const validateRealName = (rule, value, callback) => { // 真实姓名
     callback()
   }
 }
+
+export const pathFilter = (val, id) => {
+  if (id === '15') {
+    return '/' + 'dataCenter' + '/' + val.split('.')[0]
+  } else if (id === '18') {
+    return '/' + 'financecenter' + '/' + val.split('.')[0]
+  } else if (id === '23') {
+    return '/' + 'infomanage' + '/' + val.split('.')[0]
+  }
+}
+
+export const paramFilter = (obj) => {
+  for (var attr in obj) {
+    if (obj[attr] === null || obj[attr] === undefined || obj[attr] === '') {
+      delete obj[attr]
+    }
+  }
+  return obj
+}
+
 export default {
   FilterTime
 }

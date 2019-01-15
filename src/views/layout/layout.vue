@@ -12,7 +12,7 @@
 </template>
 <script>
 import MainApp from './components/mainapp'
-import Sidebar from './components/sidebar'
+import Sidebar from './components/bar'
 import Subhead from './components/subhead'
 import Bread from './components/bread'
 export default {

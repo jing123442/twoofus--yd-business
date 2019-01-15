@@ -4,6 +4,7 @@
 export const getFirstChar = (cc) => {
 }
 export const exportExcel = (data) => {
+  console.log('diaoyong fangfa l ')
   var blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'})
   var url = window.URL.createObjectURL(blob)
   var aLink = document.createElement('a')

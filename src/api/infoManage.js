@@ -16,7 +16,7 @@ const pageQuery = () => {
 }
 
 const infoManageApi = {
- /**
+  /**
    *  商户信息
    */
   USERINFO () {
@@ -27,9 +27,9 @@ const infoManageApi = {
     })
   },
   RESETPASS ({
-    beforePassword = '' ,
+    beforePassword = '',
     newPassword = '',
-    staffCode = '' 
+    staffCode = ''
   }) {
     return request({
       url: 'busi/person/password.cmd',
@@ -37,8 +37,8 @@ const infoManageApi = {
       data: Object.assign({
         beforePassword,
         newPassword,
-        staffCode,
-      },  pageQuery())
+        staffCode
+      }, pageQuery())
     })
   },
   GETSETTING () {

@@ -2,25 +2,21 @@ import request from '@/utils/request'
 import commonQuery from '@/utils/commonQuery'
 
 import {
-  getToken,
-  getAppId
+  getToken
 } from '@/utils/token'
 
 const TOKEN = getToken()
-const APPID = getAppId()
 const pageQuery = () => {
   return Object.assign({}, {
     tokenKey: TOKEN
-  }, {
-    appId: APPID
   }, commonQuery())
 }
 
 const loginApi = {
   LOGININFO  ({
-    staffCode = '',
-    staffPwd = '',
-    ip = '',
+    staffCode = 'yuanli',
+    staffPwd = '123456',
+    ip = ''
   }) {
     return request({
       url: 'busi/login/submit.cmd',

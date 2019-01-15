@@ -45,8 +45,8 @@ export default {
   },
   methods: {
     logOut () {
-      // removeToken()
-      removeSide()
+      removeToken()
+      // removeSide()
       localStorage.clear()
       window.location.reload()
     },

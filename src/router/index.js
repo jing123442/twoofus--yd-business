@@ -109,6 +109,19 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/product',
+    component: () => LayOut,
+    meta: {title: '风控数据API'},
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/riskControl/riskdata'),
+        name: ''
+        // meta: {title: '身份验证'}
+      }
+    ]
+  },
+  {
     path: '*',
     component: () => LayOut,
     // redirect: '/404',

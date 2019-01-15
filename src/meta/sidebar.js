@@ -1,36 +1,8 @@
-// import { getSide } from '@/utils/token'
-// const staticBar = [
-//   {
-//     key: 'home',
-//     ico: 'home',
-//     value: '主页面板'
-//   },
-//   {
-//     key: 'site',
-//     ico: 'web',
-//     value: '网站管理',
-//     child: [
-//       {
-//         key: 'nlist',
-//         ico: 'notice',
-//         value: '公告管理'
-//       }
-//     ]
-//   }
-//   // {
-//   //   key: 'mess',
-//   //   ico: 'rizhi',
-//   //   value: '信息管理',
-//   //   children: []
-//   // }
-// ]
 
 export const formatSide = (sidelist, menuType) => {
   if (!sidelist) {
     return []
   }
-  console.log(menuType)
-  // let sideList = JSON.parse(getSide())
   let sideArr = []
   if (menuType === '1') {
     sidelist.forEach(item => {
@@ -50,7 +22,6 @@ export const formatSide = (sidelist, menuType) => {
           })
         })
       }
-      console.log(temp, '当前的temp----1')
       sideArr.push(temp)
     })
     return sideArr
@@ -62,26 +33,26 @@ export const formatSide = (sidelist, menuType) => {
         child: []
       }
       if (item.subType && item.subType.length > 0) {
-        item.subType.forEach(middle => {
-          temp.child.push({
-            value: middle.typeName,
-            id: middle.id,
-            child: []
-          })
-        })
-        if (item.subType.subChannel && item.subType.subChannel > 0) {
-          item.subType.subChannel.forEach(chi => {
-            temp.child.child.push({
-              value: chi.channelName,
-              id: chi.channelId,
-              key: chi.channelHtml
-            })
-          })
+        for (let i = 0; i < item.subType.length; i++) {
+          temp.child[i] = {}
+          temp.child[i].value = item.subType[i].typeName
+          temp.child[i].id = item.subType[i].id
+          if (item.subType[i].subChannel && item.subType[i].subChannel.length > 0) {
+            let lastchild = []
+            for (let j = 0; j < item.subType[i].subChannel.length; j++) {
+              lastchild.push({
+                value: item.subType[i].subChannel[j].channelName,
+                id: item.subType[i].subChannel[j].channelTypeId,
+                href: item.subType[i].subChannel[j].channelHtml
+              })
+            }
+            temp.child[i].lastChild = lastchild
+          }
         }
       }
       sideArr.push(temp)
-      console.log(temp, '当前的temp----1')
     })
+    console.log(sideArr, '))))))))')
+    return sideArr
   }
-  return sideArr
 }

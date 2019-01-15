@@ -1,5 +1,5 @@
 import loginApi from '@/api/login'
-import { setToken, setAppId, setStaffCode, setUserName, setPassWord} from '@/utils/token'
+import { setToken, setAppId, setStaffCode, setUserName, setPassWord } from '@/utils/token'
 import { Message } from 'element-ui'
 // import sideBar from '@/meta/sidebar'
 const user = {
@@ -40,7 +40,7 @@ const user = {
             commit('SET_INFO', result.datas.userInfo)
             setAppId(result.datas.userInfo.appId)
             setToken(result.datas.tokenKey)
-            sessionStorage.setItem("setSide", JSON.stringify(result.datas.menuList))
+            sessionStorage.setItem('setSide', JSON.stringify(result.datas.menuList))
             setStaffCode(result.datas.userInfo.staffCode)
             resolve()
           } else {
@@ -59,7 +59,7 @@ const user = {
         loginApi['PRODUCTMENU']({}).then(response => {
           const result = response.data
           if (result.code === 200) {
-            sessionStorage.setItem("setSide", JSON.stringify(result.datas))
+            sessionStorage.setItem('setSide', JSON.stringify(result.datas))
             resolve(result)
           } else {
             Message.warning({

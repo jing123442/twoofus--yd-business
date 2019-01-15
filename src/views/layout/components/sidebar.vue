@@ -33,7 +33,7 @@
                 <span slot="title">{{item.value}}</span>
               </template>
           </el-menu-item>-->
-          <TreeMenu :treedata="item"></TreeMenu>
+          <TreeMenu :treedata="item" ></TreeMenu>
         </div>
         <div class='text-center'>
         <el-button class='navButton' @click='changeMenu'>{{this.menuType === '1'?'产品服务':'用户中心'}}</el-button>
@@ -49,7 +49,7 @@ import { pathFilter } from '@/filters/index'
 // import { mapMutations, mapGetters } from 'vuex'
 import sideBar from '@/meta/sidebar'
 import TreeMenu from '@/components/tree/treemenu'
-import { getMenuType, getUserName, getPassWord} from '@/utils/token'
+import { getUserName, getPassWord} from '@/utils/token'
 export default {
   name: 'Sidebar',
   components: {
@@ -71,22 +71,14 @@ export default {
       console.log(sideBar.mainbar())
       return sideBar.mainbar()
     }
-    // ...mapGetters([
-    //   'sidebarList'
-    // ])
   },
   methods: {
-    // ...mapMutations({
-    //   setSidebarList: 'SET_SIDEBAR_LIST'
-    // }),
     handleSel (key, keyPath) {
       let pathTo = pathFilter(keyPath[1], keyPath[0])
       this.$router.push({ path: pathTo })
     },
     changeMenu () { // product,user 点击后请求另一套接口，渲染目录 ,vuex中存入的状态是user，触发
-      this.menuType = getMenuType()
       if (this.menuType === '1') {
-        console.log('11111111')
         this.$store.dispatch('productMenuGet').then(res => {
         })
       } else if (this.menuType === '2') {

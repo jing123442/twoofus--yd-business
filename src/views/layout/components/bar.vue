@@ -13,6 +13,7 @@
         :collapse="isCollapse"
         :default-openeds="openMenu"
         v-if="sidebarList"
+        @open='handleOpen'
       >
         <div v-for="(item, index) in sidebarList" :key="index" >
           <!-- <el-submenu v-if="item.child && item.child.length > 0" :index="item.key" v-bind:key="index">
@@ -49,7 +50,7 @@ import { pathFilter } from '@/filters/index'
 // import { mapMutations, mapGetters } from 'vuex'
 import { formatSide } from '@/meta/sidebar'
 import TreeMenu from '@/components/tree/treemenu'
-import { getMenuType, getUserName, getPassWord} from '@/utils/token'
+import { getUserName, getPassWord } from '@/utils/token'
 export default {
   name: 'Sidebar',
   components: {
@@ -69,31 +70,36 @@ export default {
     }
   },
   computed: {
-    // ...mapGetters([
-    //   'sidebarList'
-    // ])
   },
   methods: {
-    // ...mapMutations({
-    //   setSidebarList: 'SET_SIDEBAR_LIST'
-    // }),
     handleSel (key, keyPath) {
-      let pathTo = pathFilter(keyPath[1], keyPath[0])
-      this.$router.push({ path: pathTo })
+      if (this.menuType === '2') { // 直接打开risk页面中的iframe
+        
+      } else {
+        let pathTo = pathFilter(keyPath[1], keyPath[0])
+        this.$router.push({ path: pathTo })
+      }
+    },
+    handleOpen (val) {
+      console.log(val,'想要set的值')
+      if(this.menuType === '2'){
+        sessionStorage.setItem('productShow', JSON.stringify(val))
+       console.log(sessionStorage.getItem('productShow'),'当前是open获取的传参')
+      }
     },
     changeMenu () {
-      console.log(getMenuType())
       if (this.menuType === '1') {
         this.menuType = '2'
         this.$store.dispatch('productMenuGet').then(res => {
-          this.getMenuArr = JSON.parse(sessionStorage.getItem("setSide"))
+          this.getMenuArr = JSON.parse(sessionStorage.getItem('setSide'))
           this.sidebarList = formatSide(this.getMenuArr, this.menuType)
+          this.$router.push({path: '/product/index'})
         })
       } else if (this.menuType === '2') {
         this.menuType = '1'
         this.loginForm.ip = sessionStorage.getItem('Ip')
         this.$store.dispatch('LoginByUsername', this.loginForm).then(res => {
-          this.getMenuArr = JSON.parse(sessionStorage.getItem("setSide"))
+          this.getMenuArr = JSON.parse(sessionStorage.getItem('setSide'))
           this.sidebarList = formatSide(this.getMenuArr, this.menuType)
         }).catch(() => {
         })
@@ -101,10 +107,10 @@ export default {
     }
   },
   created () {
-    this.getMenuArr = JSON.parse(sessionStorage.getItem("setSide"))
+    this.getMenuArr = JSON.parse(sessionStorage.getItem('setSide'))
     this.sidebarList = formatSide(this.getMenuArr, this.menuType)
     this.loginForm.username = getUserName()
-    this.loginForm.password = getPassWord() 
+    this.loginForm.password = getPassWord()
   },
   watch: {
 

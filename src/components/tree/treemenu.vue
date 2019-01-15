@@ -1,19 +1,21 @@
 <template>
   <div>
-    <el-submenu v-if='treedata.child && treedata.child.length > 0' :index='treedata.id' >
+    <el-submenu v-if='treedata.child && treedata.child.length > 0' :index='treedata.id+""' >
       <template slot='title'>
         <!-- <svg-icon :icon-class='treedata.ico' v-if='treedata.ico' /> -->
         <span slot='title'>{{treedata.value}}</span>
       </template>
-      <div v-for='(children, index) in treedata.child' v-bind:key='index'>
-        <el-menu-item :index='children.key'>
-          <!-- <svg-icon :icon-class='children.ico' v-if='children.ico'  /> -->
-          {{children.value}}
+      <div v-for='(children, index) in treedata.child' :key='index+"mid"'>
+        <el-submenu :index='children.id+""' v-if='children.lastChild && children.lastChild.length > 0'>
+        <template slot="title">{{children.value}}</template>
+        <el-menu-item :index="val.key+''" v-for='(val,key) in children.lastChild' :key='key+"nextchild"'>{{val.value}}</el-menu-item>
+        </el-submenu>
+        <el-menu-item v-else :index='children.key+""'>
+          <span slot='title'>{{children.value}}</span>
         </el-menu-item>
-        <treeItem :treedata='children.child' v-if='children.child && children.child.length > 0'></treeItem>
       </div>
     </el-submenu>
-    <el-menu-item v-else :index='treedata.id' >
+    <el-menu-item v-else :index='treedata.id+""' >
       <template slot='title'>
         <svg-icon :icon-class='treedata.ico' v-if='treedata.ico' />
         <span slot='title'>{{treedata.value}}</span>
@@ -27,6 +29,8 @@ export default {
   props: ['treedata'],
   data () {
     return {}
+  },
+  mounted () {
   }
 }
 </script>

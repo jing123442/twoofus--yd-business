@@ -31,7 +31,8 @@ const user = {
       return new Promise((resolve, reject) => {
         loginApi['LOGININFO']({
           staffCode: username,
-          staffPwd: userInfo.password
+          staffPwd: userInfo.password,
+          ip: userInfo.ip
         }).then(response => {
           const result = response.data
           if (result.code === 200) {

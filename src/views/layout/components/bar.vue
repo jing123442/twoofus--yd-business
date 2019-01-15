@@ -91,10 +91,10 @@ export default {
         })
       } else if (this.menuType === '2') {
         this.menuType = '1'
+        this.loginForm.ip = sessionStorage.getItem('Ip')
         this.$store.dispatch('LoginByUsername', this.loginForm).then(res => {
           this.getMenuArr = JSON.parse(sessionStorage.getItem("setSide"))
           this.sidebarList = formatSide(this.getMenuArr, this.menuType)
-          console.log('1111111111111',this.getMenuArr)
         }).catch(() => {
         })
       }

@@ -18,15 +18,17 @@ const pageQuery = () => {
 
 const loginApi = {
   LOGININFO  ({
-    staffCode = 'wangshan',
-    staffPwd = '123456'
+    staffCode = '',
+    staffPwd = '',
+    ip = '',
   }) {
     return request({
       url: 'busi/login/submit.cmd',
       method: 'post',
       data: Object.assign({
         staffCode,
-        staffPwd
+        staffPwd,
+        ip
       }, commonQuery())
     })
   },

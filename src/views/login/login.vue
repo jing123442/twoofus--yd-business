@@ -61,10 +61,8 @@ export default {
   },
   methods: {
     handleLogin () {
-      this.loginForm.ip = sessionStorage.getItem('Ip')
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          console.log(this.loginForm)
           this.loading = true
           this.$store.dispatch('LoginByUsername', this.loginForm).then((res) => {
             this.loading = false

@@ -74,17 +74,16 @@ export default {
   methods: {
     handleSel (key, keyPath) {
       if (this.menuType === '2') { // 直接打开risk页面中的iframe
-        
+        this.$store.commit('changeIframeHref', keyPath[2])
       } else {
         let pathTo = pathFilter(keyPath[1], keyPath[0])
         this.$router.push({ path: pathTo })
       }
     },
     handleOpen (val) {
-      console.log(val,'想要set的值')
-      if(this.menuType === '2'){
-        sessionStorage.setItem('productShow', JSON.stringify(val))
-       console.log(sessionStorage.getItem('productShow'),'当前是open获取的传参')
+      if (this.menuType === '2') {
+        // sessionStorage.setItem('productShow', cc)
+        this.$store.commit('changePresentId', val)
       }
     },
     changeMenu () {
@@ -101,6 +100,7 @@ export default {
         this.$store.dispatch('LoginByUsername', this.loginForm).then(res => {
           this.getMenuArr = JSON.parse(sessionStorage.getItem('setSide'))
           this.sidebarList = formatSide(this.getMenuArr, this.menuType)
+          this.$router.push({path: '/datacenter/index'})
         }).catch(() => {
         })
       }

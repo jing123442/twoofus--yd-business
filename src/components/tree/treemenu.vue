@@ -8,7 +8,7 @@
       <div v-for='(children, index) in treedata.child' :key='index+"mid"'>
         <el-submenu :index='children.id+""' v-if='children.lastChild && children.lastChild.length > 0'>
         <template slot="title">{{children.value}}</template>
-        <el-menu-item :index="val.key+''" v-for='(val,key) in children.lastChild' :key='key+"nextchild"'>{{val.value}}</el-menu-item>
+        <el-menu-item :index="val.href+''" v-for='(val,key) in children.lastChild' :key='key+"nextchild"'>{{val.value}}</el-menu-item>
         </el-submenu>
         <el-menu-item v-else :index='children.key+""'>
           <span slot='title'>{{children.value}}</span>

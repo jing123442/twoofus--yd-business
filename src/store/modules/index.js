@@ -4,8 +4,7 @@ import { Message } from 'element-ui'
 // import sideBar from '@/meta/sidebar'
 const user = {
   state: {
-    info: {},
-    menuType: ''
+    info: {}
     // token: getToken(),
     // sidebar: {
     //   lists: []

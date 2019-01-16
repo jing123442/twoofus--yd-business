@@ -26,6 +26,7 @@ export const formatSide = (sidelist, menuType) => {
     })
     return sideArr
   } else if (menuType === '2') {
+    console.log(sidelist)
     sidelist.forEach(item => {
       let temp = {
         value: item.typeName,

@@ -27,7 +27,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import { removeToken } from '@/utils/token'
+// import { removeToken } from '@/utils/token'
 export default {
   name: 'SubHead',
   data () {
@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     logOut () {
-      removeToken()
+      // removeToken()
       // removeSide()
       localStorage.clear()
       window.location.reload()

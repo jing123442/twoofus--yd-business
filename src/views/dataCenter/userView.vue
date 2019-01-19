@@ -11,8 +11,8 @@
       </el-select>
     </div>
     <DataBlock :values="dataBlock"></DataBlock>
-    <div style="padding:30px;" class="model-con">
-      <el-form :model="formInline" >
+    <div style="padding:0;" class="model-con">
+      <el-form :model="formInline" style="padding:30px 30px 0;" >
         <el-form-item label="选择日期：">
           <el-col :span="11">
             <el-date-picker
@@ -69,28 +69,57 @@ export default {
           tip: '请联系翼盾销售负责人进行充值'
         }
       ],
+
       option: {
-        legend: {
-          data: []
+        title: {
+          text: '某楼盘销售情况',
+          subtext: '纯属虚构'
+        },
+        grid: {
+          x: 65,
+          y: 45,
+          x2: 35,
+          y2: 45,
+          borderWidth: 1
         },
         tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'cross'
+          trigger: 'axis'
+        },
+        legend: {
+          data: ['意向', '预购', '成交']
+
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            mark: {show: true},
+            dataView: {show: true, readOnly: false},
+            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+            restore: {show: true},
+            saveAsImage: {show: true}
           }
         },
-        xAxis: {
-          type: 'category',
-          data: []
-        },
-        yAxis: {
-          type: 'value'
-        },
+        color: ['#26dad2', '#1976d2', '#5c4ac7', '#ef5350', '#ffb22b', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3'],
+        calculable: true,
+        xAxis: [
+          {
+            type: 'category',
+            boundaryGap: false,
+            data: ['2011/11/11', '2012/11/11', '2013/11/11', '2014/11/11', '2015/11/11', '2016/11/11', '2017/11/11']
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
         series: [
           {
-            data: [],
+            name: '成交',
             type: 'line',
-            smooth: true
+            smooth: true,
+            // itemStyle: {normal: {areaStyle: {type: 'default'}}},
+            data: [10, 12, 21, 54, 44, 31, 11]
           }
         ]
       },

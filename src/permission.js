@@ -1,13 +1,14 @@
-import { getToken } from '@/utils/token'
+// import { getToken } from '@/utils/token'
 // import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import router from './router'
 
-NProgress.configure({ showSpinner: false }) // NProgress Configuration
+NProgress.configure({ showSpinner: true }) // NProgress Configuration
 
 // router.beforeEach((to, from, next) => {
 //   NProgress.start()
+//   console.log(0)
 //   if (getToken()) {
 //     if (to.path === '/login') {
 //       next('/')

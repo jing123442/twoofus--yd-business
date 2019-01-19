@@ -15,3 +15,95 @@
 .is-horizontal {
   display: none;
 }
+// .el-submenu {
+//   .el-menu-item {
+//     height: 40px;
+//     line-height: 40px;
+//   }
+// }
+// .el-menu-item, .el-submenu__title {
+//   height: 46px;
+//   line-height: 46px;
+// }
+.el-date-editor .el-range-input {
+  width:130px;
+}
+.el-date-editor .el-range-separator {
+  width: 60px;
+}
+.el-select-dropdown__list {
+  margin: 0 0 17px 0;
+}
+.el-pagination {
+  text-align: right;
+}
+.el-col-2{
+  text-align: center;
+}
+.inline-form{
+  .el-form-item__label{
+    text-align: left;
+    width:82px!important;
+  }
+  .el-form-item__content {
+    margin-left:82px!important;
+    margin-right:20px;
+  }
+  .el-col-11 {
+    width:45%;
+  }
+  .el-col-2 {
+    width:6%;
+  }
+}
+
+.el-col-11 {
+  width:15%;
+}
+.el-col-2 {
+  width:2%;
+}
+.el-col-8 {
+  width:45%;
+  margin:5px 20px;
+}
+.el-card {
+  position:relative;
+}
+.el-card__body{
+  padding:10px;
+}
+.el-table__header-wrapper .el-table th {
+  background:#333!important;
+}
+.el-submenu__title:hover {
+ color:#fff
+}
+.el-tag--success {
+  background:#26dad2;
+  color:#fff;
+}
+.el-tag--info {
+  background:#ffb22b;
+  color:#fff;
+}
+.el-tag{
+  // padding: 3px 10px;
+  border:none;
+  line-height: 20px;
+  height:20px;
+  color: #ffffff;
+  font-weight: 400;
+  border-radius: 4px;
+  font-size: 13px;
+}
+.el-tag--danger {
+background:#ef5350;
+color:#fff;
+}
+.el-table__header{
+  font-size:15px
+}
+.el-table thead {
+    color:#67757c;
+}

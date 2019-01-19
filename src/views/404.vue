@@ -17,12 +17,17 @@ export default {
 </script>
 <style lang="scss">
 .error-box {
-  height: 100%;
-  position: fixed;
+  // height: 100%;
+  // position: fixed;
   width: 100%
 }
 .error-box .error-body {
-  padding-top: 5%
+  padding-top: 5%;
+  padding-bottom: 5%;
+  a {
+    color: #ff7100;
+    font-weight: bold;
+  }
 }
 .error-box .error-title {
   font-size: 100px;

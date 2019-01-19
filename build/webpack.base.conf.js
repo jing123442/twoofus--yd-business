@@ -33,7 +33,7 @@ module.exports = {
     'vue': 'Vue',
     'element-ui':'Element',
     'moment': 'moment'
-  },  
+  },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
@@ -51,7 +51,14 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        include: [
+          resolve('src'),
+          resolve('test'),
+          resolve('node_modules/webpack-dev-server/client'),
+          resolve('node_modules/vue-echarts'),
+          resolve('node_modules/resize-detector'),
+          resolve('node_modules/lrz')
+      ]
       },
       {
         test: /\.svg$/,

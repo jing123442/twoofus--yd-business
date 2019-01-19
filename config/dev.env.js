@@ -2,6 +2,6 @@
 module.exports = {
   NODE_ENV: '"development"',
   ENV_CONFIG: '"dev"',
-  BASE_API: '"http://report.rule.yipurse.cn/"'
-  // BASE_API: '"http://192.168.2.183:8080/"'
+  BASE_API: '"http://api.business.yipurse.cn/api/"',
+  MOCK: false
 }

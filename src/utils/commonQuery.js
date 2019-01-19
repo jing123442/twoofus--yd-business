@@ -23,7 +23,7 @@ export const getParam = (name) => {
 export const getAppKey = (appId) => {
   const AppSet = [
     {
-      id: 'PROCESS_SYSTEM',
+      id: 'CUSTOMER_SYSTEM',
       key: '2d817b039b891596'
     }
   ]
@@ -38,7 +38,7 @@ export const getAppKey = (appId) => {
 export const commonQuery = () => {
   let AppKey = ''
   // let AppID = getParam('appId')
-  let AppID = 'PROCESS_SYSTEM'
+  let AppID = 'CUSTOMER_SYSTEM'
   if (getAppKey(AppID).length === 0) {
     console.log('not find key')
     return false

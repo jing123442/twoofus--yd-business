@@ -7,6 +7,7 @@ import './icons' // icon
 import './permission' // permission control
 import filters from './filters'
 import VueECharts from '@/components/charts/index'
+import './assets/iconfont/iconfont.css'
 
 Vue.component('chart', VueECharts)
 

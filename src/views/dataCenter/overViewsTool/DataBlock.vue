@@ -3,7 +3,7 @@
     <li>
       <div class="dataBody greenStyle">
         <div>
-          <p class="img"><i class='el-icon-message'></i></p>
+          <p class="img"><i class='iconfont myicon-barchart'></i></p>
           <p class="item">
             <span class="title">{{values[0].item}}</span>
             <span class="number">{{values[0].val}}</span>
@@ -18,7 +18,7 @@
     <li >
       <div class="dataBody orangeStyle">
         <div>
-          <p class="img"><i class='el-icon-document'></i></p>
+          <p class="img"><i class='iconfont myicon-jizhang'></i></p>
           <p class="item">
             <span class="title">{{values[1].item}}</span>
             <span class="number">{{values[1].val}}</span>
@@ -33,7 +33,7 @@
     <li>
       <div class="dataBody blueStyle">
         <div>
-          <p class="img"><i class='el-icon-printer'></i></p>
+          <p class="img"><i class='iconfont myicon-caifua'></i></p>
           <p class="item">
             <span class="title">{{values[2].item}}</span>
             <span class="number">{{values[2].val}}</span>
@@ -77,6 +77,7 @@ export default {
     border-radius:4px;
     height: 100%;
     padding: 30px 29px;
+    box-shadow:0px 5px 20px rgba(0, 0, 0, 0.05);
     div {
       width: 100%;
       height: unset;

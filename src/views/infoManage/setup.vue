@@ -34,7 +34,7 @@ export default {
         this.contactMan = result.contactMan
         this.contactManMobile = result.contactManMobile
         this.contactManMail = result.contactManMail
-        this.isSend = result.isSend
+        this.isSend = this.switchFilter(result.isSend)
       }).catch(error => { console.log(error) })
     },
     setsetting () {
@@ -48,6 +48,10 @@ export default {
         return 1
       } else if (type === false) {
         return 0
+      } else if (type === '1') {
+        return true
+      } else if (type === '0') {
+        return false
       }
     }
   },

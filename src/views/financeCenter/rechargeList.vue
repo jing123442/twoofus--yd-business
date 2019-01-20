@@ -80,7 +80,8 @@ export default {
       ],
       tableRanderData: [],
       currentPage: 1,
-      totalPage: 5
+      totalPage: 5,
+      rechargeStatus: ''
     }
   },
   methods: {
@@ -88,14 +89,14 @@ export default {
       let tempStartDate = moment(new Date(this.rechargeList.startDate) * 1).format('YYYY-MM-DD')
       let tempEndDate = moment(new Date(this.rechargeList.endDate) * 1).format('YYYY-MM-DD')
       if (this.rechargeList.rechargeStatus !== '') {
-        this.rechargeList.rechargeStatus =
+        this.rechargeStatus =
           this.rechargeList.rechargeType + this.rechargeList.rechargeStatus
       }
       let temp = {
         pageNum: this.currentPage,
         pageSize: 10,
         rechargeType: this.rechargeList.rechargeType,
-        rechargeStatus: this.rechargeList.rechargeStatus,
+        rechargeStatus: this.rechargeStatus,
         orderId: this.rechargeList.orderId,
         startDate: tempStartDate,
         endDate: tempEndDate

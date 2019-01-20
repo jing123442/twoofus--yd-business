@@ -51,6 +51,7 @@ import overViewApi from '@/api/dataCenter'
 import {exportExcel} from '@/utils/common'
 import financeApi from '@/api/financeCenter'
 import elTable from '@/components/table/elTable'
+import { paramFilter } from '@/filters/index'
 export default {
   data () {
     return {
@@ -80,6 +81,7 @@ export default {
     getProduct () {
       overViewApi['PRODUCTLIST']({}).then(res => {
         this.productList = res.data.datas
+        this.productList.unshift({channelId: null, channelName: '全部产品'})
       }).catch(error => {
         console.log(error)
       })
@@ -97,7 +99,7 @@ export default {
       }
     },
     getConsumeList () {
-      financeApi['CONSUMELIST'](this.getParam()).then(res => {
+      financeApi['CONSUMELIST'](paramFilter(this.getParam())).then(res => {
         this.totalPage = res.data.datas.lastPage * 10
         this.tableRanderData = res.data.datas.list
         this.tableRanderData.map(item => {

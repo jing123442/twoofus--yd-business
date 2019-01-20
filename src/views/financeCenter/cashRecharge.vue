@@ -33,8 +33,9 @@
               ></el-date-picker>
             </el-col>
           </el-form-item>
-          <el-form-item label='上传凭证' requierd>
-            <myUpload @getImg='getRemitSrc' ></myUpload>
+            <el-form-item label='上传凭证' required prop='remitSrc'>
+            <myUpload @getImg='getRemitSrc'></myUpload>
+            <el-input class='uploadPosition' v-model='cashRechargeForm.remitSrc'></el-input>
           </el-form-item>
           <el-form-item label='验证码' prop='ranDomManural'>
             <el-col :span='18'>
@@ -80,7 +81,7 @@ export default {
         remitDate: [{type: 'string', required: true, message: '请选择日期', trigger: 'change'}],
         rechargeMoney: [{required: true, validator: validateOnlyNumber, trigger: 'blur'}],
         ranDomManural: [{required: true, validator: validateCheckCode, trigger: 'blur'}],
-        remitSrc: [{requierd: true, message: '请上传充值凭证', trigger: 'blur'}]
+        remitSrc:[{required: true,  message: '请上传凭证',trigger: 'change'}],
       },
       merchantName: '',
       balance: '',
@@ -151,4 +152,10 @@ export default {
 </script>
 
 <style scoped>
+.uploadPosition{
+  position:absolute;
+  top:0px;
+  z-index:-100;
+  
+}
 </style>

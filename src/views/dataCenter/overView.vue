@@ -2,6 +2,7 @@
   <div class='mainPage'>
     <!-- 顶部轮播的消息 -->
     <CarouselWords :infolist='noticeListInfo'></CarouselWords>
+    <i class='iconfont myicon-gonggao smlIcon'> </i>
     <!-- 客户信息 -->
     <!-- <div class=' info'>
       <h3 class='text-left'>客户信息</h3>
@@ -76,7 +77,7 @@ export default {
         { prop: 'endDate', label: '截止日期' }
       ],
       productList: [],
-      customInfo: {}
+      customInfo: []
     }
   },
   methods: {
@@ -95,10 +96,10 @@ export default {
         .then(res => {
           const result = res.data.datas
           this.customInfo = [
-            {key: '公司名称 ', value: result.businessDO.businessName},
-            {key: '联系人 ', value: result.businessDO.contactMan},
-            {key: '联系手机 ', value: result.businessDO.contactManMobile},
-            {key: '联系邮箱 ', value: result.businessDO.contactManMail}
+            {key: '公司名称 ', value: result.businessDO.businessName, icon: 'myicon-homepage_fill', iconColor: '#1976d2'},
+            {key: '联系人 ', value: result.businessDO.contactMan, icon: 'myicon-shumashouji', iconColor: '#26dad2'},
+            {key: '联系手机 ', value: result.businessDO.contactManMobile, icon: 'myicon-businesscard_fill', iconColor: '#7460ee'},
+            {key: '联系邮箱 ', value: result.businessDO.contactManMail, icon: 'myicon-mail_fill', iconColor: '#ffb22b'}
           ]
           this.dataBlock[0].val = result.recordCnt
           this.dataBlock[1].val = '￥' + result.recordAmount
@@ -156,6 +157,15 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+.smlIcon{
+  position:absolute;
+  top:6px;
+  left:30px;
+  font-size:15px;
+  line-height:30px;
+  height:40px;
+  z-index:100;
+}
 .el-button {
   width: 185px;
   height: 34px;

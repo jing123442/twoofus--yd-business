@@ -3,7 +3,7 @@
     <div class='model-con'>
       <h3>线下充值</h3>
       <div class='form-con'>
-        <el-form ref='cashRechargeForm' :model='cashRechargeForm' label-width='80px' :rules='rule'>
+        <el-form ref='cashRechargeForm' :model='cashRechargeForm' label-width='90px' :rules='rule'>
           <el-form-item label='公司名称'>
             <span>{{merchantName}}</span>
           </el-form-item>
@@ -61,7 +61,7 @@
 <script>
 import moment from 'moment'
 import financeApi from '@/api/financeCenter'
-import commonQuery from '@/utils/commonQuery'
+// import commonQuery from '@/utils/commonQuery'
 import myUpload from './cashRechargeTool/formUpload'
 import { validateBankCard, validateText, validateOnlyNumber, validateCheckCode } from '@/filters/index'
 export default {
@@ -81,7 +81,7 @@ export default {
         remitDate: [{type: 'string', required: true, message: '请选择日期', trigger: 'change'}],
         rechargeMoney: [{required: true, validator: validateOnlyNumber, trigger: 'blur'}],
         ranDomManural: [{required: true, validator: validateCheckCode, trigger: 'blur'}],
-        remitSrc:[{required: true,  message: '请上传凭证',trigger: 'change'}],
+        remitSrc: [{required: true, message: '请上传凭证', trigger: 'change'}]
       },
       merchantName: '',
       balance: '',
@@ -127,14 +127,17 @@ export default {
     },
     getImgCode () {
       this.randomnum = Math.ceil(Math.random() * 1000000)
-      console.log(this.randomnum, 'randomunu')
-      this.imgurl = `http://api.business.yipurse.cn/api/busi/apply/imagecode.cmd?ranDom=${
-        this.randomnum
-      }&snKey=${commonQuery().snKey}&timestamp=${
-        commonQuery().timestamp
-      }&signSystem=${commonQuery().signSystem}&systemKey=${
-        commonQuery().systemKey
-      }`
+      financeApi['IMGCODE']({random: this.randomnum}).then(res => {
+        console.log(res)
+        this.imgurl = 'data:image/png;base64,' + res.data.datas
+      })
+      // this.imgurl = `http://api.business.yipurse.cn/api/busi/apply/imagecode.cmd?ranDom=${
+      //   this.randomnum
+      // }&snKey=${commonQuery().snKey}&timestamp=${
+      //   commonQuery().timestamp
+      // }&signSystem=${commonQuery().signSystem}&systemKey=${
+      //   commonQuery().systemKey
+      // }`
     },
     getRemitSrc (val) {
       this.cashRechargeForm.remitSrc = val
@@ -156,6 +159,5 @@ export default {
   position:absolute;
   top:0px;
   z-index:-100;
-  
 }
 </style>

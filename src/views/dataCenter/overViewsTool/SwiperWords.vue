@@ -1,6 +1,6 @@
 <template>
   <swiper
-    style="height:40px;font-size:13px;"
+    style="height:40px;font-size:13px;background:#fff;box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);borderRadius:4px"
     class="carouselWords"
     :options="option"
     ref="swiperOption"
@@ -8,8 +8,7 @@
   >
     <!-- slides -->
     <swiper-slide style="height:40px;" v-for="(item,index) in list" :key="index">
-     <ion-icon name="ios-heart"></ion-icon>
-      <span style="font-size:13px;white-space:nowrap">{{item}}</span>
+      <span style="font-size:13px;white-space:nowrap;line-height:40px;">{{item}}</span>
     </swiper-slide>
   </swiper>
 </template>
@@ -87,7 +86,7 @@ export default {
 
 <style scoped lang='scss'>
 .carouselWords {
-  margin: 0 0 20px 0;
+  margin: 2px 0 20px 0;
 }
 .swiper-wrapper {
   height: 100%;
@@ -95,7 +94,7 @@ export default {
   .swiper-slide {
     line-height: 35px;
     text-align: left;
-    padding: 0 15px;
+    padding: 0 30px;
     margin: 0;
     font-size: 13px;
 

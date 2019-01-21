@@ -235,7 +235,7 @@ div:focus{
   height: 60px;
   // border-bottom: 1px solid #e6e6e6;
   display: flex;
-  background-color: #0f75ff;
+  background-color: #1976d2;
   li {
     flex: 1;
     font-size: 14px;
@@ -275,12 +275,15 @@ div:focus{
   }
 }
 #breadnav {
-  padding: 0px 20px;
+  padding: 15px 20px;
   margin-bottom: 30px;
-  height: 46px;
-  line-height: 46px;
+  height: 60px;
+  font-size:18px;
+  // line-height: 60px;
   background-color: #fff;
+  color:'#1e88e5 !important;';
   box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
+ 
 }
 #main {
   // margin: 20px;

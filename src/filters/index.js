@@ -71,11 +71,11 @@ export const validateText = (rule, value, callback) => { // 仅为中文字符(�
     callback()
   }
 }
-export const validateCheckCode = (rule, value, callback) => { // 验证码，四位，仅为数字或者字母
+export const validateCheckCode = (rule, value, callback) => { // 验证码，五位，仅为数字或者字母
   if (value === '') {
     callback(new Error('填入验证码'))
   } else {
-    if (!/^[[0-9a-zA-Z]{4}$/.test(value)) {
+    if (!/^[[0-9a-zA-Z]{5}$/.test(value)) {
       callback(new Error('请输入四位验证码'))
     }
     callback()

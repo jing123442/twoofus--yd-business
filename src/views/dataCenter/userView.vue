@@ -31,11 +31,14 @@
             style="width: 100%;"
           ></el-date-picker>
         </el-col>
-        <el-button type="primary" plain @click="indexClick(1)" class="buttonstyle">调用总次数</el-button>
-          <el-button type="primary" plain @click="indexClick(2)">调用总金额</el-button>
+        <el-button-group>
+        <el-button type="primary"  @click="indexClick(1)" class="buttonstyle">调用总次数</el-button>
+          <el-button type="primary" @click="indexClick(2)">调用总金额</el-button>
+          </el-button-group>
           <el-button type="primary" @click="searchTrend" style="float:right">搜索</el-button>
       </el-form-item>
       </el-form>
+      <p style='textAlign:center;color:#1976d2'>{{option.series[0].name}}</p>
       <chart :options="option" auto-resize/>
     </div>
   </div>
@@ -69,60 +72,86 @@ export default {
           tip: '请联系翼盾销售负责人进行充值'
         }
       ],
-
       option: {
-        title: {
-          text: '某楼盘销售情况',
-          subtext: '纯属虚构'
-        },
-        grid: {
-          x: 65,
-          y: 45,
-          x2: 35,
-          y2: 45,
-          borderWidth: 1
-        },
-        tooltip: {
-          trigger: 'axis'
-        },
         legend: {
-          data: ['意向', '预购', '成交']
-
+          data: []
         },
-        toolbox: {
-          show: true,
-          feature: {
-            mark: {show: true},
-            dataView: {show: true, readOnly: false},
-            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-            restore: {show: true},
-            saveAsImage: {show: true}
+        color: ['#26dad2'],
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross'
           }
         },
-        color: ['#26dad2', '#1976d2', '#5c4ac7', '#ef5350', '#ffb22b', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3'],
-        calculable: true,
-        xAxis: [
-          {
-            type: 'category',
-            boundaryGap: false,
-            data: ['2011/11/11', '2012/11/11', '2013/11/11', '2014/11/11', '2015/11/11', '2016/11/11', '2017/11/11']
-          }
-        ],
-        yAxis: [
-          {
-            type: 'value'
-          }
-        ],
+        xAxis: {
+          type: 'category',
+          data: [],
+          name: ''
+        },
+        yAxis: {
+          type: 'value',
+          name: ''
+        },
         series: [
           {
-            name: '成交',
+            name: '',
+            data: [],
             type: 'line',
-            smooth: true,
-            // itemStyle: {normal: {areaStyle: {type: 'default'}}},
-            data: [10, 12, 21, 54, 44, 31, 11]
+            smooth: true
           }
         ]
       },
+      // option: {
+      //   title: {
+      //     text: '某楼盘销售情况',
+      //     subtext: '纯属虚构'
+      //   },
+      //   grid: {
+      //     x: 65,
+      //     y: 45,
+      //     x2: 35,
+      //     y2: 45,
+      //     borderWidth: 1
+      //   },
+      //   tooltip: {
+      //     trigger: 'axis'
+      //   },
+      //   legend: {
+      //     data: ['意向', '预购', '成交']
+
+      //   },
+      //   toolbox: {
+      //     show: true,
+      //     feature: {
+      //       mark: {show: true},
+      //       dataView: {show: true, readOnly: false},
+      //       magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+      //       restore: {show: true},
+      //       saveAsImage: {show: true}
+      //     }
+      //   },
+      //   color: ['#26dad2', '#1976d2', '#5c4ac7', '#ef5350', '#ffb22b', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3'],
+      //   calculable: true,
+      //   xAxis: [
+      //     {
+      //       type: 'category',
+      //       // boundaryGap: false,
+      //       data: []
+      //     }
+      //   ],
+      //   yAxis: {
+      //       type: 'value'
+      //     },
+      //   series: [
+      //     {
+      //       // name: '成交',
+      //       type: 'line',
+      //       smooth: true,
+      //       // itemStyle: {normal: {areaStyle: {type: 'default'}}},
+      //       data: []
+      //     }
+      //   ]
+      // },
       formInline: {
         // date: [moment().subtract('days', 6).format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')]
         startDate: moment().subtract('days', 6).format('YYYY-MM-DD'),
@@ -159,6 +188,7 @@ export default {
     },
     indexClick (val) {
       this.trend = val
+      val === 1 ? (this.option.series[0].name = '调用总次数') : (this.option.series[0].name = '调用总金额')
     },
     searchTrend () {
       this.getList()
@@ -172,13 +202,22 @@ export default {
         startDate: tempStartDate,
         endDate: tempEndDate
       }
-      console.log(paramFilter(param))
       overViewApi['TRENDCHART'](paramFilter(param))
         .then(response => {
           const result = response.data
           if (result.code === 200) {
+            if (tempStartDate === tempEndDate) {
+              this.option.xAxis.name = '时'
+            } else {
+              this.option.xAxis.name = '日'
+            }
+            if (this.trend === '1') {
+              this.option.yAxis.name = '次'
+            } else {
+              this.option.yAxis.name = '元'
+            }
             this.option.xAxis.data = result.datas.labels
-            this.option.series = [{data: result.datas.data}]
+            this.option.series[0].data = result.datas.data
           }
         })
         .catch(error => {

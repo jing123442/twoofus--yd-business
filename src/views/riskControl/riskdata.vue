@@ -1,6 +1,8 @@
 <template>
   <div class='riskData'>
-    <el-col :span="8" v-for="(content, index) in renderData" :key="index">
+     <el-tabs v-model="activeName" type="card" @tab-click="handleTabClick">
+    <el-tab-pane :label="item.typeName" :name="item.id+''" v-for='(item,key) in originMenu' :key='key+"tab"'>
+    <el-col :span="8" v-for="(content, index) in randerData" :key="index">
     <el-card shadow="hover" >
       <div class='middleCon flex'>
         <img :src="'http://user.business.yipurse.cn/user/logo/'+content.channelLogo" class='imgSize'>
@@ -15,6 +17,8 @@
       </div>
     </el-card>
   </el-col>
+    </el-tab-pane>
+  </el-tabs>
   <el-dialog title='接入说明' :visible.sync="dialogTableVisible" v-if='dialogSrc' width='1500px' top='50px'>
     <iframe :src="'http://user.business.yipurse.cn/user/channel/'+dialogSrc" frameborder="0" class='myifram'></iframe>
   </el-dialog>
@@ -25,47 +29,55 @@
 export default {
   data () {
     return {
+      originMenu: [],
       side: [],
-      renderData: [],
-      dialogTableVisible: false
+      randerData: [],
+      dialogTableVisible: false,
+      dialogSrc: ''
     }
   },
   computed: {
-    fatherId () {
-      return this.$store.state.product.presentId
-    },
-    dialogSrc () {
-      return this.$store.state.product.iframeHref
+    activeName: {
+      get: function () {
+        return this.$store.state.product.iframeHref
+      },
+      set: function () {}
     }
   },
   methods: {
-    clickButton (val) {
-      this.$store.commit('changeIframeHref', val)
+    clickButton (val) { // 更改vuex的三级展开的id
+      this.dialogSrc = val
+      this.dialogTableVisible = true
+    },
+    handleTabClick (tab, event) {
+      this.$store.commit('setBreadnavTitle', tab.label)
+      this.$store.commit('changeIframeHref', tab.name)
     }
   },
-  mounted () {
-    this.side = JSON.parse(sessionStorage.getItem('setSide'))[0].subType
-    this.renderData = this.side[0].subChannel
+  beforeDestroy () { this.$store.commit('setBreadnavTitle', '') },
+  mounted () { // 进入页面的时候渲染开头目录的页面
+    this.originMenu = JSON.parse(sessionStorage.getItem('setSide'))
+    this.randerData = []
+    this.originMenu[0].subType.forEach(item => {
+      if (item.subChannel && item.subChannel.length > 0) {
+        this.randerData = this.randerData.concat(item.subChannel)
+      }
+    })
   },
   watch: {
-    fatherId () {
-      this.side.forEach(item => {
-        if ((item.id + '') === this.fatherId) {
-          this.renderData = item.subChannel
+    activeName () { // 监控一级目录id，变化以后，就改变页面渲染内容
+      this.randerData = []
+      this.originMenu.forEach(menu => {
+        if ((menu.id + '') === this.activeName) {
+          console.log(menu.subType)
+          menu.subType.forEach(item => {
+            if (item.subChannel && item.subChannel.length > 0) {
+              this.randerData = this.randerData.concat(item.subChannel)
+            }
+          })
         }
       })
-    },
-    dialogSrc () {
-      if (!this.dialogSrc) {
-        this.dialogTableVisible = false
-      } else {
-        this.dialogTableVisible = true
-      }
-    },
-    dialogTableVisible () {
-      if (this.dialogTableVisible === false) {
-        setTimeout(() => { this.$store.commit('changeIframeHref', '') }, 500)
-      }
+      console.log(this.randerData, 'this.randerData')
     }
   }
 }
